@@ -1,0 +1,7 @@
+# Direct requirements for running the API web server script. Used to generate requirements.txt.
+# alembic~=1.14.0
+python-dotenv~=1.0.1
+fastapi[standard]~=0.115.6
+sqlmodel~=0.0.22
+# Because sqlmodel doesn't pull in needed postgresql deps...
+sqlalchemy[postgresql]~=2.0.36
