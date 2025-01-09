@@ -123,6 +123,4 @@ This also removes data stored in the backing database.
 ## Support
 Source code is available online at https://github.com/brews/atoywebapi/. This software is Open Source and available under the Apache License, Version 2.0.
 
-## Development
-
 Please file bugs in the [bug tracker](https://github.com/brews/atoywebapi/issues).
