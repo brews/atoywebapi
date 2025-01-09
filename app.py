@@ -115,7 +115,7 @@ app = FastAPI(
     description="This is optional description text. Lorem ipsum odor amet, consectetuer adipiscing elit. Habitant taciti quisque fermentum nisl ligula praesent. Venenatis nostra lacinia pellentesque efficitur netus dignissim. Eget aenean sapien semper nisi maecenas nunc. Ac nec a potenti donec nunc sit. Penatibus sapien ante commodo, viverra netus vitae nam cras. Duis porttitor platea penatibus viverra etiam velit. Egestas et venenatis dictum gravida viverra nullam nullam donec mus.\n```\nimport coolpackage\n\noutput = coolpackage.do_something_cool()\n```\nLorem ipsum odor amet, consectetuer adipiscing elit. Habitant taciti quisque fermentum nisl ligula praesent. Venenatis nostra lacinia pellentesque efficitur netus dignissim. Eget aenean sapien semper nisi maecenas nunc. Ac nec a potenti donec nunc sit. Penatibus sapien ante commodo, viverra netus vitae nam cras. Duis porttitor platea penatibus viverra etiam velit. Egestas et venenatis dictum gravida viverra nullam nullam donec mus.",
     version="0.0.1",
     terms_of_service="https://ourcompany.example.com/tos",
-        contact={
+    contact={
         "name": "Some Optional Guy",
         "url": "http://ourcompany.example.com/contact/",
         "email": "someguy@ourcompany.example.com",
@@ -141,7 +141,6 @@ def create_facility(facility: Facility, session: SessionDep) -> Facility:
     """
     # TODO: Not sure we're handing the exception correctly for FastAPI as it's not in the OpenAPI docs.
     try:
-
         session.add(facility)
         session.commit()
         session.refresh(facility)
@@ -151,7 +150,8 @@ def create_facility(facility: Facility, session: SessionDep) -> Facility:
             # Facility request is trying to create has uid of existing facility.
             # Apparently SQLmodel isn't catching these, yet?
             raise HTTPException(
-                status_code=409, detail="A resource with this uid already exists",
+                status_code=409,
+                detail="A resource with this uid already exists",
             )
         else:
             raise
@@ -162,9 +162,15 @@ def create_facility(facility: Facility, session: SessionDep) -> Facility:
 def read_facilities(
     session: SessionDep,
     segment: Annotated[str | None, Query(description="Facilities from segment")] = None,
-    technology: Annotated[str | None, Query(description="Facilities for technology")] = None,
-    announced_before: Annotated[datetime.date | None, Query(description="Announcement date before YYYY-MM-DD")] = None,
-    announced_after: Annotated[datetime.date | None, Query(description="Announcement date after YYYY-MM-DD")] = None,
+    technology: Annotated[
+        str | None, Query(description="Facilities for technology")
+    ] = None,
+    announced_before: Annotated[
+        datetime.date | None, Query(description="Announcement date before YYYY-MM-DD")
+    ] = None,
+    announced_after: Annotated[
+        datetime.date | None, Query(description="Announcement date after YYYY-MM-DD")
+    ] = None,
     offset: int = 0,
     limit: Annotated[int, Query(le=5000)] = 100,
 ) -> list[Facility]:
