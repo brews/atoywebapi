@@ -4,7 +4,8 @@ atoywebapi is a simple toy RESTful web API server written in Python with fastapi
 
 The API does CRUD for facilities-level clean energy investments. The service is backed by a Postgresql database.
 
-This is a toy. Don't use any of this in production.
+> [!CAUTION]
+> This is a toy. Don't use any of this in production.
 
 
 ## Examples
